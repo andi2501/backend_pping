@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin//(origins={"http://localhost:4200"})
+@CrossOrigin(origins="http://localhost:4200/")
 @RequestMapping("api/break")
 public class FoodOptionController {
 
     @Autowired
     private FoodOptionService foodOptionService;
 
-    @PostMapping
+    @GetMapping(path="/")
     public List<FoodOption> breakStarter() {
         return foodOptionService.getAllFoodOptions();
     }
