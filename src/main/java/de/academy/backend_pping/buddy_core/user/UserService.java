@@ -8,9 +8,11 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    // TODO Cori: Hashing des Passworts
 
     public UserEntity registerUser(String username, String password) {
         UserEntity newUser = new UserEntity(username, password);
@@ -18,5 +20,8 @@ public class UserService {
         return newUser;
     }
 
-    // TODO Cori: Methode ob username existiert -> Christiane muss diese aus dem FE aufrufen um dort zu validieren
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
 }

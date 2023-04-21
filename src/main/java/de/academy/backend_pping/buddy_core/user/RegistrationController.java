@@ -1,15 +1,14 @@
 package de.academy.backend_pping.buddy_core.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/registration")
 public class RegistrationController {
 
+    private UserDTO userDTO;
     private UserService userService;
 
     @Autowired
@@ -18,11 +17,12 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public @ResponseBody UserDTO registerUser(UserDTO userDTO){
+    public @ResponseBody UserDTO registerUser(@RequestBody UserDTO userDTO){
 
         userService.registerUser(userDTO.getUsername(), userDTO.getPassword());
 
         return userDTO;
     }
+
 
 }
