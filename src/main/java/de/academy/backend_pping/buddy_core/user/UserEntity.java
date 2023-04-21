@@ -3,12 +3,11 @@ package de.academy.backend_pping.buddy_core.user;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.List;
 
 @Entity
 public class UserEntity {
 
+    // Attributes, Primary Key
     @Id
     @GeneratedValue
     private long id;
@@ -17,19 +16,25 @@ public class UserEntity {
 
     private String password;
 
-//    @ManyToMany
-//    private List<UserEntity> friends;
-//
-//    private boolean isAdmin;
+    private boolean isAdmin;
 
-    public UserEntity(){}
+    private boolean innovationLabActive;
+
+    private boolean isAnonymous;
+
+    private int achievementPoints;
+
+    // Constructors
+    public UserEntity() {
+    }
 
     public UserEntity(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public long getId(){
+    //Getter und Setter
+    public long getId() {
         return id;
     }
 
@@ -49,19 +54,35 @@ public class UserEntity {
         this.password = password;
     }
 
-//    public List<UserEntity> getFriends() {
-//        return friends;
-//    }
-//
-//    public void setFriends(List<UserEntity> friends) {
-//        this.friends = friends;
-//    }
-//
-//    public boolean isAdmin() {
-//        return isAdmin;
-//    }
-//
-//    public void setAdmin(boolean admin) {
-//        isAdmin = admin;
-//    }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isInnovationLabActive() {
+        return innovationLabActive;
+    }
+
+    public void setInnovationLabActive(boolean innovationLabActive) {
+        this.innovationLabActive = innovationLabActive;
+    }
+
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
+
+    public int getAchievementPoints() {
+        return achievementPoints;
+    }
+
+    public void setAchievementPoints(int achievementPoints) {
+        this.achievementPoints = achievementPoints;
+    }
 }
