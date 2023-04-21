@@ -11,7 +11,7 @@ import java.util.UUID;
 @Entity
 public class SessionEntity {
 
-    // Erzeugung einer zufälligen Session-ID, die in DB gespeichert wird (SessionController)
+    // Erzeugung einer zufälligen Session-ID, die in die DB gespeichert wird (SessionController)
     @Id
     private String id = UUID.randomUUID().toString();
 
