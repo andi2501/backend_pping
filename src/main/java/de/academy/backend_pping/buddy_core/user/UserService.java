@@ -1,9 +1,7 @@
-package de.academy.backend_pping.break_group.user;
+package de.academy.backend_pping.buddy_core.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService {

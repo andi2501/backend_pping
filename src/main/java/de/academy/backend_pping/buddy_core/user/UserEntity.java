@@ -1,4 +1,4 @@
-package de.academy.backend_pping.break_group.user;
+package de.academy.backend_pping.buddy_core.user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

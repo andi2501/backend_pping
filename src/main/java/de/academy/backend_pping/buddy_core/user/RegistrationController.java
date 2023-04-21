@@ -1,6 +1,5 @@
-package de.academy.backend_pping.break_group.user;
+package de.academy.backend_pping.buddy_core.user;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
