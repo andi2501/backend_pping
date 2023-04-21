@@ -17,7 +17,6 @@ public class FoodOptionController {
 
     @GetMapping("/break")
     public List<FoodOption> breakStarter() {
-
-        return new ArrayList<>();
+        return foodOptionService.getAllFoodOptions();
     }
 }

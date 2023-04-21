@@ -10,7 +10,8 @@ public class FoodOptionService {
 
     @Autowired
     private FoodOptionRepository foodOptionRepository;
-    public List<FoodOption> getFoodOptions() {
+
+    public List<FoodOption> getAllFoodOptions() {
         return (List<FoodOption>) foodOptionRepository.findAll();
     }
 }
