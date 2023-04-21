@@ -1,10 +1,13 @@
 package de.academy.backend_pping.buddy_core.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
@@ -24,8 +27,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        http
 //                .authorizeRequests()
 //                .antMatchers("/", "/api/registration").permitAll() // neue Zeile: Zugriff aller auf Home und Register
-//                .antMatchers(HttpMethod.POST, "/api/registration").permitAll()
-//                .anyRequest().authenticated()
+//                .anyRequest().permitAll()
 //                .and()
 //                .formLogin()
 //                .loginProcessingUrl("/api/login")
@@ -34,6 +36,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .logout().logoutSuccessUrl("/").and() // neue Zeile: nach Logout Weiterleitung zu Home (statt Login)
 //                .httpBasic();
 //    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
 
 }
