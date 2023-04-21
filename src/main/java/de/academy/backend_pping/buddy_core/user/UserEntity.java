@@ -3,6 +3,7 @@ package de.academy.backend_pping.buddy_core.user;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class UserEntity {
@@ -84,5 +85,20 @@ public class UserEntity {
 
     public void setAchievementPoints(int achievementPoints) {
         this.achievementPoints = achievementPoints;
+    }
+
+    // Hash-code und Equals-Methode
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return id == that.id && isAdmin == that.isAdmin && innovationLabActive == that.innovationLabActive && isAnonymous == that.isAnonymous && achievementPoints == that.achievementPoints && username.equals(that.username) && password.equals(that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, isAdmin, innovationLabActive, isAnonymous, achievementPoints);
     }
 }
