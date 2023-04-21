@@ -1,5 +1,7 @@
 package de.academy.backend_pping.innovation_lab.posts;
 
+import de.academy.backend_pping.buddy_core.user.UserEntity;
+import de.academy.backend_pping.buddy_core.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,13 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class PostServiceTest {
 
     PostService postService;
-    UserRepository userRepository;
+    UserService userService;
+
     RandomGenerator randomGenerator;
 
     @Autowired
-    public PostServiceTest(PostService postService, UserRepository userRepository) {
+    public PostServiceTest(PostService postService, UserService userService) {
         this.postService = postService;
-        this.userRepository = userRepository;
+        this.userService = userService;
         this.randomGenerator = new Random();
     }
 
@@ -29,14 +32,16 @@ class PostServiceTest {
     void createPost() {
         String testName = "Chris" + randomGenerator.nextInt();
         // Create Post with new User
-        User author = userRepository.save(new User(testName));
+        UserEntity author = userService.registerUser(testName,"");
         Post post = new Post(author,"PostCreator","JUnit sollte für alle Services genutzt werden.");
-        postService.createPost(post);
+        Post postReturn = postService.createPost(post);
 
         // Create Post with existing User (only mock test for User)
-        User authorExisting = userRepository.findUserById(author.getId());
+        UserEntity authorExisting = userService.findById(author.getId());
         Post post2 = new Post(authorExisting,"MeinZweiter Post","Ipsum larum...");
-        postService.createPost(post2);
+        Post postReturn2 = postService.createPost(post2);
+
+
 
     }
 
@@ -49,7 +54,7 @@ class PostServiceTest {
 
         // Create Post with new User
         String testName = "Tim" + randomGenerator.nextInt();
-        User author = userRepository.save(new User(testName));
+        UserEntity author = userService.registerUser(testName,"");
         Post post = new Post(author,"findPost1","findPost1");
         postService.createPost(post);
         Post post2 = new Post(author,"findPost2","findPost2");
@@ -71,7 +76,7 @@ class PostServiceTest {
 
         // Case post found
         String testName = "Thomas" + randomGenerator.nextInt();
-        User author = userRepository.save(new User(testName));
+        UserEntity author = userService.registerUser(testName,"");
         Post post = new Post(author,"findPostId1","findPostId1");
         Post postReturn = postService.createPost(post);
 

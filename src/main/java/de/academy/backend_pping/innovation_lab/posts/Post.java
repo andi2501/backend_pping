@@ -1,6 +1,7 @@
 package de.academy.backend_pping.innovation_lab.posts;
 
 
+import de.academy.backend_pping.buddy_core.user.UserEntity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Post {
     @CreationTimestamp
     private LocalDateTime creationTimestamp;
     @ManyToOne
-    private User author;
+    private UserEntity author;
     private int postPoints;
 
     private String title;
@@ -32,7 +33,7 @@ public class Post {
     }
 
 
-    public Post(User author, String title, String text) {
+    public Post(UserEntity author, String title, String text) {
         this.author = author;
         this.title = title;
         this.text = text;
@@ -48,11 +49,11 @@ public class Post {
         return creationTimestamp;
     }
 
-    public User getAuthor() {
+    public UserEntity getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserEntity author) {
         this.author = author;
     }
 
