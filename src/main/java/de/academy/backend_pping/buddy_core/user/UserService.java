@@ -13,12 +13,9 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // TODO Cori: Hashing des Passworts
-
     public UserEntity registerUser(String username, String password) {
         UserEntity newUser = new UserEntity(username, password);
-        userRepository.save(newUser);
-        return newUser;
+        return userRepository.save(newUser);
     }
 
     public boolean existsByUsername(String username) {
