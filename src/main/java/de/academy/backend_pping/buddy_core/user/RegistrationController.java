@@ -17,10 +17,13 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public @ResponseBody UserDTO registerUser(@RequestBody UserDTO userDTO){
+    public @ResponseBody UserDTO registerUser(@RequestBody UserDTO userDtoReceived){
 
-        userService.registerUser(userDTO.getUsername(), userDTO.getPassword());
+       UserEntity newUser = userService.registerUser(userDtoReceived.getUsername(), userDtoReceived.getPassword());
 
-        return userDTO;
+       UserDTO userDtoRegistered = new UserDTO(newUser.getUsername(), newUser.getPassword(), newUser.getId());
+       userDtoRegistered.setPassword(null);
+
+       return userDtoRegistered;
     }
 }
