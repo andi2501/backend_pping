@@ -1,12 +1,14 @@
 package de.academy.backend_pping.break_group.foodoptions;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class FoodOption {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     private String name;

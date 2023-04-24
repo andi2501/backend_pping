@@ -12,6 +12,15 @@ public class FoodOptionDTO {
     public FoodOptionDTO() {
     }
 
+    public FoodOptionDTO(FoodOption foodOption) {
+        this.id = foodOption.getId();
+        this.name = foodOption.getName();
+        this.address = foodOption.getAddress();
+        this.link = foodOption.getLink();
+        this.timeDuration = foodOption.getTimeDuration();
+        this.costs = foodOption.getCosts();
+    }
+
     public FoodOptionDTO(String name, String address, String link, String timeDuration, int costs) {
         this.name = name;
         this.address = address;
