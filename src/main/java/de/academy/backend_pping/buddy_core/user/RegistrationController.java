@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/registration")
+@RequestMapping("/api/registration")
 public class RegistrationController {
 
     private UserDTO userDTO;
@@ -30,8 +30,7 @@ public class RegistrationController {
 
        UserEntity newUser = userService.registerUser(userDtoReceived.getUsername(), userDtoReceived.getPassword());
 
-       UserDTO userDtoRegistered = new UserDTO(newUser.getUsername(), newUser.getPassword(), newUser.getId());
-       userDtoRegistered.setPassword(null);
+       UserDTO userDtoRegistered = new UserDTO(newUser.getUsername(), newUser.getId());
 
        return new ResponseEntity<>(userDtoRegistered, HttpStatus.OK);
     }
