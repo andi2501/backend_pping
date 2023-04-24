@@ -2,11 +2,13 @@ package de.academy.backend_pping.break_group.timeslot;
 
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionDTO;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionService;
+import de.academy.backend_pping.buddy_core.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -34,4 +36,14 @@ public class TimeSlotController {
 //        return timeSlotService.addTimeSlotToFoodOption(timeSlotDTO, foodOptionService
 //                .getFoodOptionByName(foodOptionDTO.getName()));
 //    }
+
+    @PutMapping("/")
+    public @ResponseBody TimeSlotDTO updateExistingTimeSlot(@RequestBody TimeSlotDTO oldTimeSlotDTO) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(10000 + 1);
+        String randNumber = Integer.toString(randomNumber);
+        UserEntity currentUser = new UserEntity("user2323" + randNumber, "password23");
+        TimeSlotDTO newTimeSlotDto = timeSlotService.update(currentUser, oldTimeSlotDTO);
+        return newTimeSlotDto;
+    }
 }

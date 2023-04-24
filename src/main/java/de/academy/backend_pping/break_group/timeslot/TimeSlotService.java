@@ -2,6 +2,7 @@ package de.academy.backend_pping.break_group.timeslot;
 
 import de.academy.backend_pping.break_group.foodoptions.FoodOption;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionRepository;
+import de.academy.backend_pping.buddy_core.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,14 @@ public class TimeSlotService {
 //    }
 
 
-
+    public TimeSlotDTO update(UserEntity currentUser, TimeSlotDTO timeSlotDTO) {
+        TimeSlot timeSlot = timeSlotRepository.findById(timeSlotDTO.getId()).get();
+        List<UserEntity> users = timeSlot.getUsers();
+        users.add(currentUser);
+        timeSlot.setUsers(users);
+        timeSlotRepository.save(timeSlot);
+        return new TimeSlotDTO(timeSlot);
+    }
 
 
 
