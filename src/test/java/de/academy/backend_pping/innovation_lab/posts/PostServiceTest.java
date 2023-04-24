@@ -110,6 +110,7 @@ class PostServiceTest {
 
         // search for deleted id must return null
         assertNull(postService.findPostById(post.getId()));
+
     }
     
 }

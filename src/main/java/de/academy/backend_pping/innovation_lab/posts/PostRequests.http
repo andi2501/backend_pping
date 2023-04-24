@@ -1,0 +1,27 @@
+
+### find post based on id
+GET http://localhost:8080/api/posts/find/7
+
+### delete post based on id
+DELETE http://localhost:8080/api/posts/delete/5
+
+### get all posts based on author id
+GET http://localhost:8080/api/posts/author/1
+
+###
+POST http://localhost:8080/api/posts/create
+Content-Type: application/json
+
+{
+  "author": {
+    "id": 6,
+    "username": "Chris177829175",
+    "password": "",
+    "innovationLabActive": false,
+    "achievementPoints": 0,
+    "admin": false,
+    "anonymous": false
+  },
+  "title": "Test0r",
+  "text": "Mal schauen ob es klappt"
+}
