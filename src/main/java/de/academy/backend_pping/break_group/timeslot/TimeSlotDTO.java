@@ -14,7 +14,6 @@ import java.util.List;
 public class TimeSlotDTO {
 
     private Long id;
-
     private Time time;
     private FoodOptionDTO foodOption;
     private List<UserDTO> users;
@@ -62,5 +61,13 @@ public class TimeSlotDTO {
 
     public void setFoodOption(FoodOptionDTO foodOption) {
         this.foodOption = foodOption;
+    }
+
+    public List<UserDTO> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserDTO> users) {
+        this.users = users;
     }
 }
