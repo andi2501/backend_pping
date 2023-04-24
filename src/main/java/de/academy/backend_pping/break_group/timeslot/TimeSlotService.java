@@ -32,6 +32,19 @@ public class TimeSlotService {
         return turnEntityToDto(timeSlots);
     }
 
+//    public TimeSlotDTO addTimeSlotToFoodOption(TimeSlotDTO timeSlotDTO, FoodOption foodOption) {
+//        TimeSlot newTimeSlot = timeSlotRepository.save();
+//        return new TimeSlotDTO(newTimeSlot);
+//    }
+
+
+
+
+
+
+
+
+
     private List<TimeSlotDTO> turnEntityToDto(List<TimeSlot> timeSlots) {
         List<TimeSlotDTO> timeSlotDTOS = new ArrayList<>();
         for (TimeSlot timeSlot : timeSlots) {
