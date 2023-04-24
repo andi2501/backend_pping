@@ -51,8 +51,6 @@ public class TimeSlotService {
 
 
 
-
-
     private List<TimeSlotDTO> turnEntityToDto(List<TimeSlot> timeSlots) {
         List<TimeSlotDTO> timeSlotDTOS = new ArrayList<>();
         for (TimeSlot timeSlot : timeSlots) {
