@@ -13,15 +13,8 @@ POST http://localhost:8080/api/posts/create
 Content-Type: application/json
 
 {
-  "author": {
-    "id": 6,
-    "username": "Chris177829175",
-    "password": "",
-    "innovationLabActive": false,
-    "achievementPoints": 0,
-    "admin": false,
-    "anonymous": false
-  },
-  "title": "Test0r",
-  "text": "Mal schauen ob es klappt"
+  "title": "findPost2",
+  "text": "findPost2",
+  "anonymous": false,
+  "numberOfComments": 10
 }

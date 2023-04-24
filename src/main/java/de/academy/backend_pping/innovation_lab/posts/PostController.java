@@ -1,10 +1,12 @@
 package de.academy.backend_pping.innovation_lab.posts;
 
 import de.academy.backend_pping.buddy_core.user.UserEntity;
+import de.academy.backend_pping.buddy_core.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
@@ -13,33 +15,46 @@ public class PostController {
 
 
     private PostService postsService;
+    private UserService userService;
 
     public PostController() {
     }
 
     @Autowired
-    public PostController(PostService postsService) {
+    public PostController(PostService postsService, UserService userService) {
         this.postsService = postsService;
+        this.userService = userService;
     }
-
 
     /**
      * A new post is provided via PostMapping.<br>
      * If the post can be saved in Database the saved entity is returned, including id for future references. <br>
      * If the provided entity could not be saved a newly generated Post is returned with a message from the Master of Errors.<br>
      *
-     * @param post: Post to be created via PostMapping
+     * @param postDTO: Post to be created via PostMapping
      * @return Post entity including id OR Error Post :)
      */
     @PostMapping("/create")
-    public @ResponseBody Post createPost(@RequestBody Post post){
+    public @ResponseBody PostDTO createPost(@RequestBody PostDTO postDTO){
         try {
-            return postsService.createPost(post);
+
+            // UserEntity can be extracted from Session Information in a later step
+            UserEntity author = userService.findById(1L);
+            if (author==null){
+                return new PostDTO("3rr0r M4ster","Post could not be saved in database",false);
+            }
+
+            // generate Post Entity based on input
+            Post post = new Post(
+                    author,
+                    postDTO.getTitle(),
+                    postDTO.getText());
+
+            post = postsService.createPost(post);
+            return new PostDTO(post);
         }
         catch (IllegalArgumentException iAE){
-            return new Post(new UserEntity("ErrorMaster",""),"IllegalArgumentException",
-                    "The provided entity could not be saved due to IllegalArgumentException");
-
+            return new PostDTO("3rr0r M4ster","Post could not be saved in database",false);
         }
     }
 
@@ -53,8 +68,14 @@ public class PostController {
      * @return Post OR null
      */
     @GetMapping("/find/{id}")
-    public @ResponseBody Post findPostById(@PathVariable long id){
-        return postsService.findPostById(id);
+    public @ResponseBody PostDTO findPostById(@PathVariable long id){
+        Post post =  postsService.findPostById(id);
+
+        if (post==null){
+            return null;
+        } else {
+            return new PostDTO(post);
+        }
     }
 
     /**
@@ -79,12 +100,13 @@ public class PostController {
      * @return List of Posts OR empty List
      */
     @GetMapping("/author/{id}")
-    public List<Post> findPostsByAuthorIdOrderByCreationTimestampDesc(@PathVariable long id){
-        return postsService.findPostsByAuthorIdOrderByCreationTimestampDesc(id);
+    public List<PostDTO> findPostsByAuthorIdOrderByCreationTimestampDesc(@PathVariable long id){
+        List<Post> posts = postsService.findPostsByAuthorIdOrderByCreationTimestampDesc(id);
+
+        return posts.stream()
+                .map(post -> new PostDTO(post))
+                .collect(Collectors.toList());
+
     }
-
-
-
-
 
 }

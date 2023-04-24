@@ -28,6 +28,8 @@ public class Post {
 
     private String text;
 
+    private boolean isAnonymous;
+
 
     public Post() {
     }
@@ -38,6 +40,7 @@ public class Post {
         this.title = title;
         this.text = text;
 
+        this.isAnonymous = author.isAnonymous();
         this.postPoints = 0;
     }
 
@@ -81,6 +84,13 @@ public class Post {
         this.text = text;
     }
 
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
 
     /*
     Timestamp not included in equals and hashcode due to different accuracy of
@@ -88,15 +98,17 @@ public class Post {
     and returned timestamp by postService.findPostById
      */
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return id == post.id && postPoints == post.postPoints && Objects.equals(author, post.author) && Objects.equals(title, post.title) && Objects.equals(text, post.text);
+        return id == post.id && postPoints == post.postPoints && isAnonymous == post.isAnonymous && Objects.equals(author, post.author) && Objects.equals(title, post.title) && Objects.equals(text, post.text);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, postPoints, title, text);
+        return Objects.hash(id, author, postPoints, title, text, isAnonymous);
     }
 }
