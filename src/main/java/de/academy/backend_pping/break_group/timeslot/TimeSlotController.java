@@ -31,11 +31,15 @@ public class TimeSlotController {
         return timeSlotService.getTimeSlotsForFoodOption(foodId);
     }
 
-//    @PostMapping("/")
-//    public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption(@RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TimeSlotDTO timeSlotDTO) {
-//        return timeSlotService.addTimeSlotToFoodOption(timeSlotDTO, foodOptionService
-//                .getFoodOptionByName(foodOptionDTO.getName()));
-//    }
+    @PostMapping("/")
+    public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption(@RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TimeSlotDTO timeSlotDTO) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(10000 + 1);
+        String randNumber = Integer.toString(randomNumber);
+        UserEntity currentUser = new UserEntity("user2323" + randNumber, "password23");
+        return timeSlotService.addTimeSlotToFoodOption(timeSlotDTO, foodOptionService
+                .getFoodOptionByName(foodOptionDTO.getName()), currentUser);
+    }
 
     @PutMapping("/")
     public @ResponseBody TimeSlotDTO updateExistingTimeSlot(@RequestBody TimeSlotDTO oldTimeSlotDTO) {

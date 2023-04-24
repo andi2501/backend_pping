@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import java.util.Optional;
             when(foodOptionRepository.findAll()).thenReturn(foodOptions);
 
             // Call the method being tested
-            List<FoodOption> result = foodOptionService.getAllFoodOptions();
+            List<FoodOptionDTO> result = foodOptionService.getAllFoodOptions();
 
             // Verify that the correct list of food options was returned
             assertEquals(2, result.size());
@@ -50,7 +51,7 @@ import java.util.Optional;
             when(foodOptionRepository.save(any(FoodOption.class))).thenReturn(savedFoodOption);
 
             // Call the method being tested
-            FoodOption result = foodOptionService.save(foodOptionDTO);
+            FoodOptionDTO result = foodOptionService.save(foodOptionDTO);
 
             // Verify that the correct food option was returned
             assertEquals(1L, result.getId());
@@ -79,7 +80,7 @@ import java.util.Optional;
                     .thenReturn(existingFoodOption);
 
             // Call the method being tested
-            FoodOption result = foodOptionService.update(1L, foodOptionDTO);
+            FoodOptionDTO result = foodOptionService.update(1L, foodOptionDTO);
 
             // Verify that the correct food option was returned
             assertEquals(1L, result.getId());

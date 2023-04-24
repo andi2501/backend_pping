@@ -22,6 +22,22 @@ public class TimeSlot {
     @OneToMany
     private List<UserEntity> users;
 
+    public TimeSlot() {
+    }
+
+    public TimeSlot(Time time, FoodOption foodOption, List<UserEntity> users) {
+        this.time = time;
+        this.foodOption = foodOption;
+        this.users = users;
+    }
+
+    public TimeSlot(Long id, Time time, FoodOption foodOption, List<UserEntity> users) {
+        this.id = id;
+        this.time = time;
+        this.foodOption = foodOption;
+        this.users = users;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

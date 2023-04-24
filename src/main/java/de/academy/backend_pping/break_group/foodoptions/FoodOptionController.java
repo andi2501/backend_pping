@@ -28,8 +28,7 @@ public class FoodOptionController {
 
     @PostMapping("/")
     public @ResponseBody FoodOptionDTO createFoodOption(@RequestBody FoodOptionDTO foodOptionDTO) {
-        FoodOption foodOption = foodOptionService.save(foodOptionDTO);
-        return new FoodOptionDTO(foodOption);
+        return foodOptionService.save(foodOptionDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -39,7 +38,6 @@ public class FoodOptionController {
 
     @PutMapping("/{id}")
     public @ResponseBody FoodOptionDTO updateFoodOption(@PathVariable("id") Long id, FoodOptionDTO foodOptionDTO) {
-        FoodOption foodOption = foodOptionService.update(id, foodOptionDTO);
-        return new FoodOptionDTO(foodOption);
+        return foodOptionService.update(id, foodOptionDTO);
     }
 }

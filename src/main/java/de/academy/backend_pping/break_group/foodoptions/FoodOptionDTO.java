@@ -1,5 +1,7 @@
 package de.academy.backend_pping.break_group.foodoptions;
 
+import java.util.Objects;
+
 public class FoodOptionDTO {
 
     private Long id;
@@ -84,5 +86,18 @@ public class FoodOptionDTO {
 
     public void setCosts(int costs) {
         this.costs = costs;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FoodOptionDTO that = (FoodOptionDTO) o;
+        return costs == that.costs && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(address, that.address) && Objects.equals(link, that.link) && Objects.equals(timeDuration, that.timeDuration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, address, link, timeDuration, costs);
     }
 }
