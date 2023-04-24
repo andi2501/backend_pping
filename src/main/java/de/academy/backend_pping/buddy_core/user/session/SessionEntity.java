@@ -2,53 +2,50 @@ package de.academy.backend_pping.buddy_core.user.session;
 
 import de.academy.backend_pping.buddy_core.user.UserEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 public class SessionEntity {
 
-    // Erzeugung einer zufälligen Session-ID, die in die DB gespeichert wird (SessionController)
     @Id
-    private String id = UUID.randomUUID().toString();
+    private Long id;
 
-    @ManyToOne
-    private UserEntity user;
+    @Column
+    private String token;
 
-    private Instant expiresAt;
+    @Column
+    private LocalDateTime expirationTime;
 
     public SessionEntity() {
     }
 
-    public SessionEntity(UserEntity user, Instant expiresAt) {
-        this.user = user;
-        this.expiresAt = expiresAt;
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public String getToken() {
+        return token;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public Instant getExpiresAt() {
-        return expiresAt;
+    public LocalDateTime getExpirationTime() {
+        return expirationTime;
     }
 
-    public void setExpiresAt(Instant expiresAt) {
-        this.expiresAt = expiresAt;
+    public void setExpirationTime(LocalDateTime expirationTime) {
+        this.expirationTime = expirationTime;
     }
 }

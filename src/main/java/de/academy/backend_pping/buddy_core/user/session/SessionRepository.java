@@ -6,6 +6,5 @@ import java.time.Instant;
 import java.util.Optional;
 
 public interface SessionRepository extends CrudRepository<SessionEntity, Long> {
-
-    Optional<SessionEntity> findByIdAndExpiresAtAfter(String id, Instant expiresAt);
+    Optional<SessionEntity> findByToken(String token);
 }
