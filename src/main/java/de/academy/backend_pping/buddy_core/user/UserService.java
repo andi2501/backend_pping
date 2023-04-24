@@ -1,6 +1,5 @@
 package de.academy.backend_pping.buddy_core.user;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +25,7 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public void deleteById(long id){
+        userRepository.deleteById(id);
+    }
 }
