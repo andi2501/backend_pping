@@ -29,6 +29,16 @@ public class FoodOption {
         this.costs = costs;
     }
 
+    public FoodOption(FoodOptionDTO foodOptionDTO) {
+        this.id = foodOptionDTO.getId();
+        this.name = foodOptionDTO.getName();
+        this.address = foodOptionDTO.getAddress();
+        this.link = foodOptionDTO.getLink();
+        this.timeDuration = foodOptionDTO.getTimeDuration();
+        this.costs = foodOptionDTO.getCosts();
+    }
+
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -75,5 +85,15 @@ public class FoodOption {
 
     public void setCosts(int costs) {
         this.costs = costs;
+    }
+
+
+    // methods
+    public void updateFoodOption(FoodOptionDTO foodOptionDTO) {
+        this.name = foodOptionDTO.getName();
+        this.address = foodOptionDTO.getAddress();
+        this.link = foodOptionDTO.getLink();
+        this.timeDuration = foodOptionDTO.getTimeDuration();
+        this.costs = foodOptionDTO.getCosts();
     }
 }

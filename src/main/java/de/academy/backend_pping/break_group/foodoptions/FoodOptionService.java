@@ -14,4 +14,18 @@ public class FoodOptionService {
     public List<FoodOption> getAllFoodOptions() {
         return (List<FoodOption>) foodOptionRepository.findAll();
     }
+
+    public FoodOption save(FoodOptionDTO foodOptionDTO) {
+        return foodOptionRepository.save(new FoodOption(foodOptionDTO));
+    }
+
+    public void delete(Long id) {
+        foodOptionRepository.deleteById(id);
+    }
+
+    public FoodOption update(Long id, FoodOptionDTO foodOptionDTO) {
+        FoodOption foodOption = foodOptionRepository.findById(id).get();
+        foodOption.updateFoodOption(foodOptionDTO);
+        return foodOptionRepository.save(foodOption);
+    }
 }
