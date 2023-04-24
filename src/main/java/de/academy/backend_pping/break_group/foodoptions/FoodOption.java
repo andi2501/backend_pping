@@ -16,8 +16,6 @@ public class FoodOption {
     private String link;
     private String timeDuration;
     private int costs;
-    //    private String tags;
-    //    private String additionalInfos;
 
 
     public FoodOption() {
