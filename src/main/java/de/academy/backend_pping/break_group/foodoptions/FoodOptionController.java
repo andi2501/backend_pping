@@ -10,31 +10,34 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200/")
-@RequestMapping("api/break")
+@RequestMapping("api/break/foodoption")
 public class FoodOptionController {
 
     @Autowired
     private FoodOptionService foodOptionService;
 
-    @GetMapping("/foodoption")
-    public List<FoodOption> breakStarter() {
+    @GetMapping("/")
+    public List<FoodOptionDTO> breakStarter() {
         return foodOptionService.getAllFoodOptions();
     }
 
-//    @GetMapping("/foodoption/{id}")
+    @GetMapping("/{id}")
+    public FoodOptionDTO getFoodOptionById(@PathVariable("id") Long id) {
+        return foodOptionService.getFoodOptionsById(id);
+    }
 
-    @PostMapping("/foodoption")
+    @PostMapping("/")
     public @ResponseBody FoodOptionDTO createFoodOption(@RequestBody FoodOptionDTO foodOptionDTO) {
         FoodOption foodOption = foodOptionService.save(foodOptionDTO);
         return new FoodOptionDTO(foodOption);
     }
 
-    @DeleteMapping("/foodoption/{id}")
+    @DeleteMapping("/{id}")
     public void deleteFoodOption(@PathVariable("id") Long id) {
         foodOptionService.delete(id);
     }
 
-    @PutMapping("/foodoption/{id}")
+    @PutMapping("/{id}")
     public @ResponseBody FoodOptionDTO updateFoodOption(@PathVariable("id") Long id, FoodOptionDTO foodOptionDTO) {
         FoodOption foodOption = foodOptionService.update(id, foodOptionDTO);
         return new FoodOptionDTO(foodOption);

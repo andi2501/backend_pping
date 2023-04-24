@@ -23,6 +23,11 @@ public class Tag {
     public Tag() {
     }
 
+    public Tag(FoodOption foodOption, String name) {
+        this.foodOption = foodOption;
+        this.name = name;
+    }
+
     public Tag(Long id, FoodOption foodOption, String name) {
         this.id = id;
         this.foodOption = foodOption;
