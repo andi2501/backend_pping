@@ -35,27 +35,23 @@ public class PostController {
      * @return Post entity including id OR Error Post :)
      */
     @PostMapping("/create")
-    public @ResponseBody PostDTO createPost(@RequestBody PostDTO postDTO){
-        try {
+    public @ResponseBody PostDTO createPost(@RequestBody PostDTO postDTO) {
 
-            // UserEntity can be extracted from Session Information in a later step
-            UserEntity author = userService.findById(1L);
-            if (author==null){
-                return new PostDTO("3rr0r M4ster","Post could not be saved in database",false);
-            }
-
-            // generate Post Entity based on input
-            Post post = new Post(
-                    author,
-                    postDTO.getTitle(),
-                    postDTO.getText());
-
-            post = postsService.createPost(post);
-            return new PostDTO(post);
+        // UserEntity can be extracted from Session Information in a later step
+        UserEntity author = userService.findById(1L);
+        if (author == null) {
+            return new PostDTO("3rr0r M4ster", "Post could not be saved in database", false);
         }
-        catch (IllegalArgumentException iAE){
-            return new PostDTO("3rr0r M4ster","Post could not be saved in database",false);
-        }
+
+        // generate Post Entity based on input
+        Post post = new Post(
+                author,
+                postDTO.getTitle(),
+                postDTO.getText());
+
+        post = postsService.createPost(post);
+        return new PostDTO(post);
+
     }
 
 
