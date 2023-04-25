@@ -35,10 +35,12 @@ public class PostController {
      * @return Post entity including id OR Error Post :)
      */
     @PostMapping("/create")
-    public @ResponseBody PostDTO createPost(@RequestBody PostDTO postDTO) {
+    public @ResponseBody PostDTO createPost(
+            @CookieValue(value = "userID", defaultValue = "1") long id,
+            @RequestBody PostDTO postDTO) {
 
         // UserEntity can be extracted from Session Information in a later step
-        UserEntity author = userService.findById(1L);
+        UserEntity author = userService.findById(id);
         if (author == null) {
             return new PostDTO("3rr0r M4ster", "Post could not be saved in database", false);
         }
