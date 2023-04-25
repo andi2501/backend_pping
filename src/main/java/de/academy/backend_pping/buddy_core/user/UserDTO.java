@@ -1,7 +1,5 @@
 package de.academy.backend_pping.buddy_core.user;
 
-import org.springframework.context.annotation.Bean;
-
 public class UserDTO {
 
     private String username;
@@ -16,9 +14,8 @@ public class UserDTO {
         this.id = userEntity.getId();
     }
 
-    public UserDTO(String username, String password, long id) {
+    public UserDTO(String username, long id) {
         this.username = username;
-        this.password = password;
         this.id = id;
     }
 
