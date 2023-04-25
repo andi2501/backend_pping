@@ -38,6 +38,9 @@ public class FoodOption {
         this.costs = foodOptionDTO.getCosts();
     }
 
+    public FoodOption(Long id, String name) {
+    }
+
 
     public void setId(Long id) {
         this.id = id;

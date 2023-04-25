@@ -4,11 +4,14 @@ import de.academy.backend_pping.break_group.foodoptions.FoodOption;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionDTO;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionRepository;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.*;
@@ -25,6 +28,11 @@ import java.util.Optional;
 
         @InjectMocks
         private FoodOptionService foodOptionService;
+
+        @BeforeEach
+        public void init() {
+            MockitoAnnotations.initMocks(this);
+        }
 
         @Test
         public void testGetAllFoodOptions() {
@@ -86,5 +94,39 @@ import java.util.Optional;
             assertEquals(1L, result.getId());
             assertEquals("Peter Planet", result.getName());
         }
+
+        @Test
+        public void getFoodOptionsById_ShouldReturnCorrectFoodOptionDTO() {
+            // Arrange
+            Long id = 1L;
+            String name = "Pizza";
+            FoodOption foodOption = new FoodOption(id, name);
+            FoodOptionDTO expectedFoodOptionDTO = new FoodOptionDTO(foodOption);
+            when(foodOptionRepository.findById(id)).thenReturn(Optional.of(foodOption));
+
+            // Act
+            FoodOptionDTO actualFoodOptionDTO = foodOptionService.getFoodOptionsById(id);
+
+            // Assert
+            assertThat(actualFoodOptionDTO).isEqualTo(expectedFoodOptionDTO);
+        }
+
+        @Test
+        public void getFoodOptionByName_ShouldReturnCorrectFoodOptionDTO() {
+            // Arrange
+            Long id = 1L;
+            String name = "Pizza";
+            FoodOption foodOption = new FoodOption(id, name);
+            FoodOptionDTO expectedFoodOptionDTO = new FoodOptionDTO(foodOption);
+            when(foodOptionRepository.getFoodOptionByName(name)).thenReturn(foodOption);
+
+            // Act
+            FoodOptionDTO actualFoodOptionDTO = foodOptionService.getFoodOptionByName(name);
+
+            // Assert
+            assertThat(actualFoodOptionDTO).isEqualTo(expectedFoodOptionDTO);
+        }
+
     }
+
 
