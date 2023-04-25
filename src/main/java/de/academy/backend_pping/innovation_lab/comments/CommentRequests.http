@@ -1,0 +1,14 @@
+###
+POST http://localhost:8080/api/comments/create
+Content-Type: application/json
+
+{
+  "postID": 12,
+  "text": "FrontEnd Test",
+  "anonymous": false
+
+}
+
+
+###
+GET http://localhost:8080/api/comments/post74

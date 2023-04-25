@@ -1,7 +1,6 @@
 package de.academy.backend_pping.innovation_lab.comments;
 
 import de.academy.backend_pping.buddy_core.user.UserDTO;
-import de.academy.backend_pping.innovation_lab.posts.PostDTO;
 
 import java.time.LocalDateTime;
 
@@ -11,20 +10,16 @@ public class CommentDTO {
 
     private LocalDateTime creationTimeStamp;
 
-    private final UserDTO author;
+    private UserDTO author;
 
-    private final PostDTO post;
+    private long postID;
 
-    private final boolean isAnonymous;
+    private boolean isAnonymous;
 
-    private final String text;
+    private  String text;
 
-    // in
-    public CommentDTO(UserDTO author, PostDTO post, boolean isAnonymous, String text) {
-        this.author = author;
-        this.post = post;
-        this.isAnonymous = isAnonymous;
-        this.text = text;
+
+    public CommentDTO() {
     }
 
     // out
@@ -32,8 +27,37 @@ public class CommentDTO {
         this.id = comment.getId();
         this.creationTimeStamp = comment.getCreationTimestamp();
         this.author = new UserDTO(comment.getAuthor());
-        this.post = new PostDTO(comment.getPost());
+        this.postID = comment.getPost().getId();
         this.isAnonymous = comment.isAnonymous();
         this.text = comment.getText();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreationTimeStamp() {
+        return creationTimeStamp;
+    }
+
+    public UserDTO getAuthor() {
+        return author;
+    }
+
+
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public long getPostID() {
+        return postID;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

@@ -28,12 +28,26 @@ public class CommentService {
         return commentRepository.findCommentsByPostIdOrderByCreationTimestampAsc(id);
     }
 
+    /**
+     * A comment will be saved in database.<br>
+     * In case of post or author not found in database null is returned.
+     *
+     * @param authorId Id of Comment author
+     * @param postId Id of linked Post
+     * @param text Comment Text
+     * @return Comment OR null
+     */
     public Comment createComment(long authorId, long postId, String text){
 
         Post post = postService.findPostById(postId);
         UserEntity author = userService.findById(authorId);
 
-        return commentRepository.save(new Comment(author,post,text));
+        if (post == null || author == null){
+            return null;
+        } else {
+            return commentRepository.save(new Comment(author, post, text));
+        }
+
     }
 
     public void deleteCommentById(long id){
