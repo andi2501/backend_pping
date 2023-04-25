@@ -28,4 +28,8 @@ public class UserService {
     public void deleteById(long id){
         userRepository.deleteById(id);
     }
+
+    public UserEntity findByUsername(String username){
+        return userRepository.findByUsername(username).orElse(null);
+    }
 }

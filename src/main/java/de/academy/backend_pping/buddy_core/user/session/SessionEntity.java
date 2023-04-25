@@ -2,10 +2,7 @@ package de.academy.backend_pping.buddy_core.user.session;
 
 import de.academy.backend_pping.buddy_core.user.UserEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,6 +11,7 @@ import java.util.UUID;
 public class SessionEntity {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column
@@ -21,6 +19,8 @@ public class SessionEntity {
 
     @Column
     private LocalDateTime expirationTime;
+
+    private Long userId;
 
     public SessionEntity() {
     }
@@ -47,5 +47,13 @@ public class SessionEntity {
 
     public void setExpirationTime(LocalDateTime expirationTime) {
         this.expirationTime = expirationTime;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 }
