@@ -27,7 +27,6 @@ public class RegistrationController {
             return new ResponseEntity<>("Username already taken", HttpStatus.BAD_REQUEST);
         }
 
-
        UserEntity newUser = userService.registerUser(userDtoReceived.getUsername(), userDtoReceived.getPassword());
 
        UserDTO userDtoRegistered = new UserDTO(newUser.getUsername(), newUser.getId());
