@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin
 @RestController
@@ -20,7 +22,7 @@ public class SessionController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO, HttpServletResponse response) {
 
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
@@ -32,6 +34,10 @@ public class SessionController {
         SessionDTO sessionDTO = new SessionDTO();
         sessionDTO.setSessionToken(token);
         sessionDTO.setUserId(sessionEntity.getUserId());
+
+        Cookie cookie = new Cookie("session", sessionDTO.getSessionToken());
+        response.addCookie(cookie);
+
         return new ResponseEntity<>(sessionDTO, HttpStatus.OK);
     }
 

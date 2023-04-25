@@ -64,4 +64,9 @@ public class SessionService {
         String token = UUID.randomUUID().toString();
         return token;
     }
+
+    public long getUserId(String token) {
+        SessionEntity sessionEntity = sessionRepository.findByToken(token).orElse(null);
+        return sessionEntity.getUserId();
+    }
 }
