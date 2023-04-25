@@ -23,26 +23,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable();
     }
 
-
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/", "/api/registration").permitAll() // neue Zeile: Zugriff aller auf Home und Register
-//                .anyRequest().permitAll()
-//                .and()
-//                .formLogin()
-//                .loginProcessingUrl("/api/login")
-//                .permitAll()
-//                .and()
-//                .logout().logoutSuccessUrl("/").and() // neue Zeile: nach Logout Weiterleitung zu Home (statt Login)
-//                .httpBasic();
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-       // return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
