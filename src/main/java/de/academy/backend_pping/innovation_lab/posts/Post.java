@@ -2,13 +2,12 @@ package de.academy.backend_pping.innovation_lab.posts;
 
 
 import de.academy.backend_pping.buddy_core.user.UserEntity;
+import de.academy.backend_pping.innovation_lab.comments.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,6 +29,8 @@ public class Post {
 
     private boolean isAnonymous;
 
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 
     public Post() {
     }
@@ -92,11 +93,19 @@ public class Post {
         isAnonymous = anonymous;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+
     /*
     Timestamp not included in equals and hashcode due to different accuracy of
     produced timestamp by @CreationTimestamp
     and returned timestamp by postService.findPostById
      */
+
+
+
 
 
     @Override
