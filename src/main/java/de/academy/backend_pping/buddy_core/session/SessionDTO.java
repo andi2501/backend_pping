@@ -1,4 +1,4 @@
-package de.academy.backend_pping.buddy_core.user.session;
+package de.academy.backend_pping.buddy_core.session;
 
 public class SessionDTO {
 

@@ -1,27 +1,22 @@
-package de.academy.backend_pping.buddy_core.user.session;
+package de.academy.backend_pping.buddy_core.session;
 
 import de.academy.backend_pping.buddy_core.user.UserDTO;
-import de.academy.backend_pping.buddy_core.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 @CrossOrigin
 @RestController
 public class SessionController {
 
     private SessionService sessionService;
-    private UserService userService;
 
     @Autowired
-    public SessionController(SessionService sessionService, UserService userService) {
+    public SessionController(SessionService sessionService) {
         this.sessionService = sessionService;
-        this.userService = userService;
     }
 
     @PostMapping("/login")
@@ -45,8 +40,8 @@ public class SessionController {
         String token = request.getHeader("Authorization");
         System.out.println(token);
         if (!sessionService.invalidate(token)) {
-            return new ResponseEntity<>("du warst nicht eingeloggt", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Du warst nicht eingeloggt!", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("logout ok", HttpStatus.OK);
+        return new ResponseEntity<>("Du bist ausgeloggt!", HttpStatus.OK);
     }
 }

@@ -1,11 +1,8 @@
-package de.academy.backend_pping.buddy_core.user.session;
-
-import de.academy.backend_pping.buddy_core.user.UserEntity;
+package de.academy.backend_pping.buddy_core.session;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.UUID;
+
 
 @Entity
 public class SessionEntity {
@@ -14,10 +11,8 @@ public class SessionEntity {
     @GeneratedValue
     private Long id;
 
-    @Column
     private String token;
 
-    @Column
     private LocalDateTime expirationTime;
 
     private Long userId;
