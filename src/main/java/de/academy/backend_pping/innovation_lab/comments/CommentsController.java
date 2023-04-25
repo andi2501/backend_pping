@@ -29,10 +29,11 @@ public class CommentsController {
      * @return saved entity
      */
     @PostMapping("/create")
-    public @ResponseBody CommentDTO createComment(@RequestBody CommentDTO commentDTO){
+    public @ResponseBody CommentDTO createComment(
+            @CookieValue(value="userID", defaultValue = "11") long authorID,
+            @RequestBody CommentDTO commentDTO){
 
         // TODO: 25.04.2023 replace with current user from session management
-        long authorID = 11L;
         long postID = commentDTO.getPostID();
         String text = commentDTO.getText();
 
