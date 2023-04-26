@@ -3,6 +3,7 @@ package de.academy.backend_pping.innovation_lab.posts;
 import de.academy.backend_pping.buddy_core.user.UserDTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PostDTO {
 
@@ -20,6 +21,8 @@ public class PostDTO {
     private boolean isAnonymous;
 
     private int numberOfComments;
+
+    private List<UserDTO> commentAuthors;
 
     public PostDTO() {
     }
@@ -95,4 +98,25 @@ public class PostDTO {
     public void setAnonymous(boolean anonymous) {
         isAnonymous = anonymous;
     }
+
+    public int getNumberOfComments() {
+        return numberOfComments;
+    }
+
+    public void setNumberOfComments(int numberOfComments) {
+        this.numberOfComments = numberOfComments;
+    }
+
+    public List<UserDTO> getCommentAuthors() {
+        return commentAuthors;
+    }
+
+    public void setCommentAuthors(List<UserDTO> commentAuthors) {
+        this.commentAuthors = commentAuthors;
+    }
+
+
+
+
+
 }

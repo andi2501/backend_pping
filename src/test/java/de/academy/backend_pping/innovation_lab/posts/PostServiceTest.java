@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.random.RandomGenerator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -31,13 +32,13 @@ class PostServiceTest {
     void createPost() {
         String testName = "Chris" + randomGenerator.nextInt();
         // Create Post with new User
-        UserEntity author = userService.registerUser(testName,"");
-        Post post = new Post(author,"PostCreator","JUnit sollte für alle Services genutzt werden.");
+        UserEntity author = userService.registerUser(testName, "");
+        Post post = new Post(author, "PostCreator", "JUnit sollte für alle Services genutzt werden.");
         Post postReturn = postService.createPost(post);
 
         // Create Post with existing User (only mock test for User)
         UserEntity authorExisting = userService.findById(author.getId());
-        Post post2 = new Post(authorExisting,"MeinZweiter Post","Ipsum larum...");
+        Post post2 = new Post(authorExisting, "MeinZweiter Post", "Ipsum larum...");
         Post postReturn2 = postService.createPost(post2);
 
         // clean up
@@ -47,22 +48,22 @@ class PostServiceTest {
     }
 
     @Test
-    void findPostsByAuthorIdOrderByCreationTimestampDesc(){
+    void findPostsByAuthorIdOrderByCreationTimestampDesc() {
 
         // no author found
         List<Post> postListEmpty = postService.findPostsByAuthorIdOrderByCreationTimestampDesc(-1);
-        assertEquals(0,postListEmpty.size());
+        assertEquals(0, postListEmpty.size());
 
         // Create Post with new User
         String testName = "Tim" + randomGenerator.nextInt();
-        UserEntity author = userService.registerUser(testName,"");
-        Post post = new Post(author,"findPost1","findPost1");
+        UserEntity author = userService.registerUser(testName, "");
+        Post post = new Post(author, "findPost1", "findPost1");
         post = postService.createPost(post);
-        Post post2 = new Post(author,"findPost2","findPost2");
+        Post post2 = new Post(author, "findPost2", "findPost2");
         post2 = postService.createPost(post2);
 
         List<Post> postListExist = postService.findPostsByAuthorIdOrderByCreationTimestampDesc(author.getId());
-        assertEquals(2,postListExist.size());
+        assertEquals(2, postListExist.size());
 
 
         // Test descending Order of timestamp from returned list of posts
@@ -82,12 +83,12 @@ class PostServiceTest {
 
         // Case post found
         String testName = "Thomas" + randomGenerator.nextInt();
-        UserEntity author = userService.registerUser(testName,"");
-        Post post = new Post(author,"findPostId1","findPostId1");
+        UserEntity author = userService.registerUser(testName, "");
+        Post post = new Post(author, "findPostId1", "findPostId1");
         post = postService.createPost(post);
 
         Post postFindById = postService.findPostById(post.getId());
-        assertEquals(post,postFindById);
+        assertEquals(post, postFindById);
 
 //        // Case no post --> null
         assertNull(postService.findPostById(-1L));
@@ -97,12 +98,12 @@ class PostServiceTest {
 
     }
 
-    @Test 
-    void deletePostById(){
+    @Test
+    void deletePostById() {
         // create Post to delete
         String testName = "Thomas" + randomGenerator.nextInt();
-        UserEntity author = userService.registerUser(testName,"");
-        Post post = new Post(author,"findPostId1","findPostId1");
+        UserEntity author = userService.registerUser(testName, "");
+        Post post = new Post(author, "findPostId1", "findPostId1");
         post = postService.createPost(post);
 
         // delte post
@@ -112,5 +113,35 @@ class PostServiceTest {
         assertNull(postService.findPostById(post.getId()));
 
     }
-    
+
+    @Test
+    void addListOfCommentAuthors() {
+
+        long id = userService.findAll().get(0).getId();
+        String title = "TestTitle";
+        String text = "Ipsum Larum...";
+        int numberOfComments = 10;
+
+        PostDTO postDTO = postService.createPostAndReturn(id, title, text, numberOfComments);
+
+        // Number of comment authors greater 0
+        assertTrue(postDTO.getCommentAuthors().size() > 0);
+        // Number of comment authors less or equals requested number
+        assertTrue(postDTO.getCommentAuthors().size() <= numberOfComments);
+
+
+    }
+
+    @Test
+    void createPostAndReturn() {
+        long id = userService.findAll().get(0).getId();
+        String title = "TestTitle";
+        String text = "Ipsum Larum...";
+        int numberOfComments = 10;
+
+        PostDTO postDTO = postService.createPostAndReturn(id, title, text, numberOfComments);
+
+        // id of current user equals postDTO iauthor id
+        assertEquals(id, postDTO.getAuthor().getId());
+    }
 }

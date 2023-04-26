@@ -25,7 +25,7 @@ public class CommentsController {
     /**
      * API accepts a comment to be saved in Database.<br>
      * It returns the saved comment to provide an id and timestamp for later use.
-     * @param commentDTO
+     * @param commentDTO DTO to get Data via Requestbody for comments
      * @return saved entity
      */
     @PostMapping("/create")
@@ -60,12 +60,5 @@ public class CommentsController {
                 .map(CommentDTO::new)
                 .collect(Collectors.toList());
     }
-
-
-
-
-
-
-
 
 }

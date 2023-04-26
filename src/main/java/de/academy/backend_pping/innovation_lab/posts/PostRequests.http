@@ -3,7 +3,7 @@
 GET http://localhost:8080/api/posts/find/7
 
 ### delete post based on id
-DELETE http://localhost:8080/api/posts/delete/5
+DELETE http://localhost:8080/api/posts/delete/12
 
 ### get all posts based on author id
 GET http://localhost:8080/api/posts/author/1
