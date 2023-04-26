@@ -23,8 +23,7 @@ public class RegistrationController {
     public @ResponseBody ResponseEntity<?> registerUser(@RequestBody UserDTO userDtoReceived){
 
         if (userService.existsByUsername(userDtoReceived.getUsername())) {
-            // Return an error response to the frontend
-            return new ResponseEntity<>("Username already taken", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
 
        UserEntity newUser = userService.registerUser(userDtoReceived.getUsername(), userDtoReceived.getPassword());
