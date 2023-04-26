@@ -32,11 +32,14 @@ public class TimeSlotController {
     }
 
     @PostMapping
-    public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption(@RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TimeSlotDTO timeSlotDTO) {
+    public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption
+            (@CookieValue(value = "session", defaultValue = "1") String token,
+    @RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TimeSlotDTO timeSlotDTO) {
         Random random = new Random();
         int randomNumber = random.nextInt(10000 + 1);
         String randNumber = Integer.toString(randomNumber);
         UserEntity currentUser = new UserEntity("user2323" + randNumber, "password23");
+        // TODO sessionService
         return timeSlotService.addTimeSlotToFoodOption(timeSlotDTO, foodOptionService
                 .getFoodOptionByName(foodOptionDTO.getName()), currentUser);
     }
