@@ -34,8 +34,6 @@ public class TagController {
 
     @PostMapping
     public @ResponseBody TagDTO addTagToFoodOption(@RequestBody TagDTO tagDTO) {
-//        TagDTO tagDTO = tagFoodDTO.getTagDTO();
-//        FoodOptionDTO foodOptionDTO = tagFoodDTO.getFoodOptionDTO();
         return tagService.addTagForFoodOption(tagDTO, foodOptionService
                 .getFoodOptionByName(tagDTO.getFoodOption().getName()));
     }
