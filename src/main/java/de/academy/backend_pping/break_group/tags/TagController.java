@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("api/break/tags")
+@CrossOrigin
+@RequestMapping("/api/break/tags")
 public class TagController {
 
     @Autowired
@@ -19,13 +19,13 @@ public class TagController {
     @Autowired
     private FoodOptionService foodOptionService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<TagDTO> getTagsForFoodOption(@RequestBody FoodOptionDTO foodOptionDTO) {
         return tagService.getTagsForFoodOption(foodOptionService
                 .getFoodOptionByName(foodOptionDTO.getName()));
     }
 
-    @PostMapping("/")
+    @PostMapping
     public @ResponseBody TagDTO addTagToFoodOption(@RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TagDTO tagDTO) {
         return tagService.addTagForFoodOption(tagDTO, foodOptionService
                 .getFoodOptionByName(foodOptionDTO.getName()));

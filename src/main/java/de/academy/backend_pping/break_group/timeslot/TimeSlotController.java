@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("api/break/timeslots")
+@CrossOrigin
+@RequestMapping("/api/break/timeslots")
 public class TimeSlotController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class TimeSlotController {
     @Autowired
     private FoodOptionService foodOptionService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<TimeSlotDTO> getAllTimeSlots() {
         return timeSlotService.getAllTimeSlots();
     }
@@ -31,7 +31,7 @@ public class TimeSlotController {
         return timeSlotService.getTimeSlotsForFoodOption(foodId);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption(@RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TimeSlotDTO timeSlotDTO) {
         Random random = new Random();
         int randomNumber = random.nextInt(10000 + 1);
@@ -41,7 +41,7 @@ public class TimeSlotController {
                 .getFoodOptionByName(foodOptionDTO.getName()), currentUser);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public @ResponseBody TimeSlotDTO updateExistingTimeSlot(@RequestBody TimeSlotDTO oldTimeSlotDTO) {
         Random random = new Random();
         int randomNumber = random.nextInt(10000 + 1);
