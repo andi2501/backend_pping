@@ -9,15 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-// @CrossOrigin(origins="http://localhost:4200")
 @CrossOrigin
-@RequestMapping("api/break/foodoption")
+//// @CrossOrigin(origins="http://localhost:4200")
+@RequestMapping("/api/break/foodoption")
+//@RequestMapping("/api")
 public class FoodOptionController {
 
     @Autowired
     private FoodOptionService foodOptionService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<FoodOptionDTO> breakStarter() {
         return foodOptionService.getAllFoodOptions();
     }
