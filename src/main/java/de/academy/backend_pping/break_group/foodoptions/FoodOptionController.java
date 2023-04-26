@@ -28,7 +28,7 @@ public class FoodOptionController {
         return foodOptionService.getFoodOptionsById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public @ResponseBody FoodOptionDTO createFoodOption(@RequestBody FoodOptionDTO foodOptionDTO) {
         return foodOptionService.save(foodOptionDTO);
     }
