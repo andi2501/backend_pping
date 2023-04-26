@@ -42,11 +42,16 @@ public class TimeSlotController {
     @PostMapping
     public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption
             (@CookieValue(value = "session", defaultValue = "1") String token,
-             @RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TimeSlotDTO timeSlotDTO) {
+             @RequestBody TimeSlot_FoodOptionDTO timeSlotFoodOptionDTO) {
         long userID = sessionService.getUserId(token);
         UserEntity currentUser = userService.findById(userID);
-        return timeSlotService.addTimeSlotToFoodOption(timeSlotDTO, foodOptionService
-                .getFoodOptionByName(foodOptionDTO.getName()), currentUser);
+
+        TimeSlotDTO timeSlotDTO = timeSlotFoodOptionDTO.getTimeSlotDTO();
+        FoodOptionDTO foodOptionDTO = timeSlotFoodOptionDTO.getFoodOptionDTO();
+
+        return timeSlotService.addTimeSlotToFoodOption(timeSlotDTO,
+                foodOptionService.getFoodOptionByName(foodOptionDTO.getName()),
+                currentUser);
     }
 //    public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption
 //            (@CookieValue(value = "session", defaultValue = "1") String token,
