@@ -6,7 +6,6 @@ import de.academy.backend_pping.break_group.tags.Tag;
 import de.academy.backend_pping.break_group.tags.TagDTO;
 import de.academy.backend_pping.break_group.tags.TagRepository;
 import de.academy.backend_pping.break_group.tags.TagService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,9 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TagServiceTest {

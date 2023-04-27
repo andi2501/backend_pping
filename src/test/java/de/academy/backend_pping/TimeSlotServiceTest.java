@@ -1,31 +1,20 @@
 package de.academy.backend_pping;
-import de.academy.backend_pping.break_group.foodoptions.FoodOption;
+
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionDTO;
-import de.academy.backend_pping.break_group.foodoptions.FoodOptionRepository;
-import de.academy.backend_pping.break_group.timeslot.TimeSlot;
 import de.academy.backend_pping.break_group.timeslot.TimeSlotDTO;
-import de.academy.backend_pping.break_group.timeslot.TimeSlotRepository;
 import de.academy.backend_pping.break_group.timeslot.TimeSlotService;
 import de.academy.backend_pping.buddy_core.user.UserEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.*;
 
 
 
