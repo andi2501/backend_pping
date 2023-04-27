@@ -96,12 +96,16 @@ public class PostController {
      * in descending order.<br>
      * If no object or author is found an empty list is returned
      *
-     * @param id: id of author
      * @return List of Posts OR empty List
      */
-    @GetMapping("/author/{id}")
-    public List<PostDTO> findPostsByAuthorIdOrderByCreationTimestampDesc(@PathVariable long id) {
-        List<Post> posts = postsService.findPostsByAuthorIdOrderByCreationTimestampDesc(id);
+    @GetMapping("/author")
+    public List<PostDTO> findPostsByAuthorIdOrderByCreationTimestampDesc(
+            @CookieValue(value = "session", defaultValue = "8484beef-3a5c-49ad-a18b-dde4a39033c9") String sessionToken
+    ) {
+
+        long authorId = sessionService.getUserId(sessionToken);
+
+        List<Post> posts = postsService.findPostsByAuthorIdOrderByCreationTimestampDesc(authorId);
 
         return posts.stream()
                 .map(post -> new PostDTO(post))
