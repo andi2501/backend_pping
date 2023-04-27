@@ -1,9 +1,6 @@
 package de.academy.backend_pping.break_group.tags;
 
-import de.academy.backend_pping.break_group.foodoptions.FoodOption;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionDTO;
-
-import javax.persistence.ManyToOne;
 
 public class TagDTO {
 

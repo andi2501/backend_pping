@@ -8,9 +8,7 @@ import de.academy.backend_pping.buddy_core.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @CrossOrigin
@@ -53,18 +51,6 @@ public class TimeSlotController {
                 foodOptionService.getFoodOptionByName(foodOptionDTO.getName()),
                 currentUser);
     }
-//    public @ResponseBody TimeSlotDTO addTimeSlotToFoodOption
-//            (@CookieValue(value = "session", defaultValue = "1") String token,
-//    @RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TimeSlotDTO timeSlotDTO) {
-////        Random random = new Random();
-////        int randomNumber = random.nextInt(10000 + 1);
-////        String randNumber = Integer.toString(randomNumber);
-//        UserEntity currentUser = new SessionService ("user2323" + randNumber, "password23");
-//        // TODO sessionService
-//        return timeSlotService.addTimeSlotToFoodOption(timeSlotDTO, foodOptionService
-//                .getFoodOptionByName(foodOptionDTO.getName()), currentUser);
-//    }
-
     @PutMapping
     public @ResponseBody TimeSlotDTO updateExistingTimeSlot
             (@CookieValue(value = "session", defaultValue = "1") String token,

@@ -1,12 +1,10 @@
 package de.academy.backend_pping.break_group.tags;
 
-import de.academy.backend_pping.break_group.foodoptions.FoodOptionController;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionDTO;
 import de.academy.backend_pping.break_group.foodoptions.FoodOptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,12 +23,6 @@ public class TagController {
         return tagService.getTagsForFoodOption(foodOptionService
                 .getFoodOptionByName(foodOptionDTO.getName()));
     }
-
-//    @PostMapping
-//    public @ResponseBody TagDTO addTagToFoodOption(@RequestBody FoodOptionDTO foodOptionDTO, @RequestBody TagDTO tagDTO) {
-//        return tagService.addTagForFoodOption(tagDTO, foodOptionService
-//                .getFoodOptionByName(foodOptionDTO.getName()));
-//    }
 
     @PostMapping
     public @ResponseBody TagDTO addTagToFoodOption(@RequestBody TagDTO tagDTO) {
