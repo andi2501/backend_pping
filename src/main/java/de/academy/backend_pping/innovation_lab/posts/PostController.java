@@ -1,5 +1,6 @@
 package de.academy.backend_pping.innovation_lab.posts;
 
+import de.academy.backend_pping.buddy_core.session.SessionService;
 import de.academy.backend_pping.innovation_lab.comments.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,16 @@ public class PostController {
     private PostService postsService;
     private CommentService commentService;
 
+    private SessionService sessionService;
+
     public PostController() {
     }
 
     @Autowired
-    public PostController(PostService postsService, CommentService commentService) {
+    public PostController(PostService postsService, CommentService commentService, SessionService sessionService) {
         this.postsService = postsService;
         this.commentService = commentService;
+        this.sessionService = sessionService;
     }
 
     /**
@@ -35,16 +39,16 @@ public class PostController {
      */
     @PostMapping("/create")
     public @ResponseBody PostDTO createPost(
-            @CookieValue(value = "userID", defaultValue = "125") long id,
+            @CookieValue(value = "session", defaultValue = "8484beef-3a5c-49ad-a18b-dde4a39033c9") String sessionToken,
             @RequestBody PostDTO postDTO) {
 
+        long authorID = sessionService.getUserId(sessionToken);
 
         PostDTO returnPost = postsService.createPostAndReturn(
-                id,
+                authorID,
                 postDTO.getTitle(),
                 postDTO.getText(),
                 postDTO.getNumberOfComments());
-
 
 
         // save blanko comment in database for each commentAuthor
@@ -64,10 +68,10 @@ public class PostController {
      * @return Post OR null
      */
     @GetMapping("/find/{id}")
-    public @ResponseBody PostDTO findPostById(@PathVariable long id){
-        Post post =  postsService.findPostById(id);
+    public @ResponseBody PostDTO findPostById(@PathVariable long id) {
+        Post post = postsService.findPostById(id);
 
-        if (post==null){
+        if (post == null) {
             return null;
         } else {
             return new PostDTO(post);
@@ -82,7 +86,7 @@ public class PostController {
      * @param id Id of Post to delete
      */
     @DeleteMapping("/delete/{id}")
-    public void deletePostById(@PathVariable long id){
+    public void deletePostById(@PathVariable long id) {
         postsService.deletePostById(id);
     }
 
@@ -96,7 +100,7 @@ public class PostController {
      * @return List of Posts OR empty List
      */
     @GetMapping("/author/{id}")
-    public List<PostDTO> findPostsByAuthorIdOrderByCreationTimestampDesc(@PathVariable long id){
+    public List<PostDTO> findPostsByAuthorIdOrderByCreationTimestampDesc(@PathVariable long id) {
         List<Post> posts = postsService.findPostsByAuthorIdOrderByCreationTimestampDesc(id);
 
         return posts.stream()

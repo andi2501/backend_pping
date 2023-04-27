@@ -13,8 +13,8 @@ POST http://localhost:8080/api/posts/create
 Content-Type: application/json
 
 {
-  "title": "findPost2",
-  "text": "findPost2",
+  "title": "findPost211323",
+  "text": "findPost212312345",
   "anonymous": false,
-  "numberOfComments": 10
+  "numberOfComments": 3
 }
