@@ -68,6 +68,22 @@ public class CommentService {
         return commentRepository.findCommentsByAuthor_Id(id);
     }
 
+    public Comment updateComment(long commentAuthorId, long postId, String text){
+       // find correct comment
+
+        Comment comment = commentRepository
+                .findCommentByAuthor_IdAndPost_Id(commentAuthorId,postId)
+                .orElse(null);
+
+        if (comment == null){
+            return null;
+        } else {
+            // update Text of comment
+            comment.setText(text);
+            //save comment --> works as update if id exists
+            return commentRepository.save(comment);
+        }
+    }
 
 
 

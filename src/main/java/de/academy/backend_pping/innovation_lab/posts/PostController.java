@@ -35,7 +35,7 @@ public class PostController {
      */
     @PostMapping("/create")
     public @ResponseBody PostDTO createPost(
-            @CookieValue(value = "userID", defaultValue = "1") long id,
+            @CookieValue(value = "userID", defaultValue = "125") long id,
             @RequestBody PostDTO postDTO) {
 
 

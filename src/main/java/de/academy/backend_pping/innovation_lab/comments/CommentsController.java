@@ -89,9 +89,30 @@ public class CommentsController {
     //  updateComment(current User Id --> comment Author , post Id send )
     //  find comment to update based on comment.getAuthor().getId() = current_User.getID() + post_Id =  ?
 
+    /**
+     * API to delete a comment by Id
+     * @param id Id of comment
+     */
     @DeleteMapping("/delete/{id}")
     public void deleteCommentById(@PathVariable long id){
         commentService.deleteCommentById(id);
+    }
+
+    @PutMapping("/updateComment")
+    public CommentDTO updateComment(
+            @CookieValue(value = "userId", defaultValue = "125") long commentAuthorId,
+            @RequestBody CommentDTO commentDTO){
+
+        Comment comment = commentService.updateComment(
+                commentAuthorId,
+                commentDTO.getPostID(),
+                commentDTO.getText());
+
+        if (comment==null){
+            return null;
+        } else {
+            return new CommentDTO(comment);
+        }
     }
 
 

@@ -3,6 +3,7 @@ package de.academy.backend_pping.innovation_lab.comments;
 import de.academy.backend_pping.buddy_core.user.UserEntity;
 import de.academy.backend_pping.buddy_core.user.UserService;
 import de.academy.backend_pping.innovation_lab.posts.Post;
+import de.academy.backend_pping.innovation_lab.posts.PostDTO;
 import de.academy.backend_pping.innovation_lab.posts.PostService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -130,7 +131,44 @@ class CommentServiceTest {
 
         // cleanup
         userService.deleteById(authorComment.getId());
+    }
 
+    @Test
+    void updateComment() {
+        // generate post with blanko comments
+        PostDTO returnPost = postService.createPostAndReturn(
+                userService.findAll().get(0).getId(),
+                "TestTitle",
+                "Ipsum Larum...",
+                3);
 
+        // save blanko comment in database for each commentAuthor
+        commentService.saveDefaultCommentsByCommentAuthorsInPostDTO(returnPost);
+
+        // get corrects user id for comment author
+        long commentAuthorId = returnPost.getCommentAuthors().get(0).getId();
+
+        // update comment (correct)
+        Comment comment = commentService.updateComment(
+                commentAuthorId,
+                returnPost.getId(),
+                "Updated Text");
+
+        assertNotNull(comment);
+        assertEquals("Updated Text",comment.getText());
+
+        // update comment (incorrect commentAuthorId)
+        Comment commentNull1 = commentService.updateComment(
+                -1L,
+                returnPost.getId(),
+                "Updated Text");
+        assertNull(commentNull1);
+
+        // update comment (incorrect postId)
+        Comment commentNull2 = commentService.updateComment(
+                commentAuthorId,
+                -1L,
+                "Updated Text");
+        assertNull(commentNull2);
     }
 }

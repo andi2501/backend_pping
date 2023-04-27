@@ -73,6 +73,9 @@ public class Comment {
         isAnonymous = anonymous;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
 
     // CreationTimeStamp removed from equals
     @Override
