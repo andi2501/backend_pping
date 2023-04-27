@@ -3,14 +3,14 @@ POST http://localhost:8080/api/comments/create
 Content-Type: application/json
 
 {
-  "postID": 12,
+  "postID": 312,
   "text": "FrontEnd Test",
   "anonymous": false
 
 }
 
 ###
-GET http://localhost:8080/api/comments/post74
+GET http://localhost:8080/api/comments/post312
 
 ###
 GET http://localhost:8080/api/comments/myPosts
@@ -20,6 +20,6 @@ PUT http://localhost:8080/api/comments/updateComment
 Content-Type: application/json
 
 {
-  "postID":  207,
+  "postID":  287,
   "text":  "Comment Update vom FrontEnd"
 }

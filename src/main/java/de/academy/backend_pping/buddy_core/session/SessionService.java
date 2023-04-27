@@ -66,7 +66,9 @@ public class SessionService {
     }
 
     public long getUserId(String token) {
+
         SessionEntity sessionEntity = sessionRepository.findByToken(token).orElse(null);
+        // Hint: Es sollte auch der Fall sessionEntity==null abgefangen werden
         return sessionEntity.getUserId();
     }
 }
