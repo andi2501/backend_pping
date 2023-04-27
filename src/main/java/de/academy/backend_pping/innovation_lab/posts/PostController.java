@@ -1,6 +1,6 @@
 package de.academy.backend_pping.innovation_lab.posts;
 
-import de.academy.backend_pping.buddy_core.user.UserService;
+import de.academy.backend_pping.innovation_lab.comments.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +14,15 @@ public class PostController {
 
 
     private PostService postsService;
+    private CommentService commentService;
 
     public PostController() {
     }
 
     @Autowired
-    public PostController(PostService postsService) {
+    public PostController(PostService postsService, CommentService commentService) {
         this.postsService = postsService;
+        this.commentService = commentService;
     }
 
     /**
@@ -36,11 +38,19 @@ public class PostController {
             @CookieValue(value = "userID", defaultValue = "1") long id,
             @RequestBody PostDTO postDTO) {
 
-        return postsService.createPostAndReturn(
+
+        PostDTO returnPost = postsService.createPostAndReturn(
                 id,
                 postDTO.getTitle(),
                 postDTO.getText(),
                 postDTO.getNumberOfComments());
+
+
+
+        // save blanko comment in database for each commentAuthor
+        commentService.saveDefaultCommentsByCommentAuthorsInPostDTO(returnPost);
+
+        return returnPost;
 
     }
 

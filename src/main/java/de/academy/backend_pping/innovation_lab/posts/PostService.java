@@ -111,4 +111,16 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
+    public List<PostDTO> findPostsByCommentsWhereCommentIdIsUserId(long id){
+        List<Post> postsAll = postRepository.findAll();
+
+//        postsAll.stream()
+//                .forEach(post -> post.getComments().stream()
+//                        .filter(comment -> comment.getAuthor().getId()==id)
+//                        .findFirst()
+//                        .);
+
+        return null;
+    }
+
 }

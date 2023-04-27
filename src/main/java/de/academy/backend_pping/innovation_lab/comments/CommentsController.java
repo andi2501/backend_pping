@@ -1,5 +1,7 @@
 package de.academy.backend_pping.innovation_lab.comments;
 
+import de.academy.backend_pping.innovation_lab.posts.PostDTO;
+import de.academy.backend_pping.innovation_lab.posts.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +14,16 @@ import java.util.stream.Collectors;
 public class CommentsController {
 
     private CommentService commentService;
+    private PostService postService;
 
 
     public CommentsController() {
     }
 
     @Autowired
-    public CommentsController(CommentService commentService) {
+    public CommentsController(CommentService commentService, PostService postService) {
         this.commentService = commentService;
+        this.postService = postService;
     }
 
     /**
@@ -60,5 +64,40 @@ public class CommentsController {
                 .map(CommentDTO::new)
                 .collect(Collectors.toList());
     }
+
+
+    /**
+     * API to get all post with a request to comment for the current user
+     *
+     * @return List of Posts the user is requested for a comment
+     */
+    @GetMapping("/myPosts")
+    public List<PostDTO> findPostsByCommentsAuthorID(
+            @CookieValue(value = "userID", defaultValue = "125") long id){
+
+        List<Comment> comments = commentService.findCommentsByAuthor_Id(id);
+
+        return comments.stream()
+                .map(comment -> postService.findPostById(comment.getPost().getId()))
+                .map(PostDTO::new)
+                .collect(Collectors.toList());
+    }
+
+
+
+    // TODO: 26.04.2023 provide update function to update blanko comments -->
+    //  updateComment(current User Id --> comment Author , post Id send )
+    //  find comment to update based on comment.getAuthor().getId() = current_User.getID() + post_Id =  ?
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteCommentById(@PathVariable long id){
+        commentService.deleteCommentById(id);
+    }
+
+
+
+
+
+
 
 }

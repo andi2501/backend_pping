@@ -3,6 +3,7 @@ package de.academy.backend_pping.innovation_lab.comments;
 import de.academy.backend_pping.buddy_core.user.UserEntity;
 import de.academy.backend_pping.buddy_core.user.UserService;
 import de.academy.backend_pping.innovation_lab.posts.Post;
+import de.academy.backend_pping.innovation_lab.posts.PostDTO;
 import de.academy.backend_pping.innovation_lab.posts.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,21 @@ public class CommentService {
     public void deleteCommentById(long id){
         commentRepository.deleteById(id);
     }
+
+    public void saveDefaultCommentsByCommentAuthorsInPostDTO(PostDTO postDTO){
+
+        postDTO.getCommentAuthors().stream()
+                        .forEach(userDTO -> createComment(
+                                userDTO.getId(),
+                                postDTO.getId(),
+                                "Bitte schreibe einen Kommentar"));
+    }
+
+    public List<Comment> findCommentsByAuthor_Id(long id){
+        return commentRepository.findCommentsByAuthor_Id(id);
+    }
+
+
+
 
 }
