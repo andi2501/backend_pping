@@ -46,8 +46,8 @@ public class SessionController {
         String token = request.getHeader("Authorization");
         System.out.println(token);
         if (!sessionService.invalidate(token)) {
-            return new ResponseEntity<>("Du warst nicht eingeloggt!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("Du bist ausgeloggt!", HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 }
