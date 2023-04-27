@@ -42,12 +42,16 @@ public class SessionController {
     }
 
     @GetMapping ("/logout-user")
-    public ResponseEntity<?> logout(HttpServletRequest request) {
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         String token = request.getHeader("Authorization");
-        System.out.println(token);
         if (!sessionService.invalidate(token)) {
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
+
+        Cookie cookie = new Cookie("session", "");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
         return new ResponseEntity<>( HttpStatus.OK);
     }
 }
