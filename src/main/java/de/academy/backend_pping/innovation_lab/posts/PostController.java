@@ -91,7 +91,7 @@ public class PostController {
     }
 
     /**
-     * Returns a List of Post Objects based on the author id.<br>
+     * API Returns a List of Post Objects based on the author id.<br>
      * The order of posts inside the List is based on the creation timestamp
      * in descending order.<br>
      * If no object or author is found an empty list is returned
@@ -104,13 +104,11 @@ public class PostController {
     ) {
 
         long authorId = sessionService.getUserId(sessionToken);
-
         List<Post> posts = postsService.findPostsByAuthorIdOrderByCreationTimestampDesc(authorId);
 
         return posts.stream()
-                .map(post -> new PostDTO(post))
+                .map(PostDTO::new)
                 .collect(Collectors.toList());
-
     }
 
 }
